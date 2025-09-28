@@ -25,34 +25,31 @@ def play_again(): # Function to ask the user if they want to play again
       play_again()
 
 def game(): # Main Game Logic
-   guessed_number = int(random.randint(1, 10)) # Random number between 1 and 10
+   correct = int(random.randint(1, 10)) # Random number between 1 and 10
    attempts = 3 # Number of attempts for each game
    print("I have selected a number between 1 and 10. You have 3 attempts to guess it.")
-   number_guessed = int(input("Enter your guess: "))
-   if type(number_guessed) != int:
-       print("Invalid Input, please enter a number!")
-       game()
-   while attempts > 0:
-         if number_guessed > 10 or number_guessed < 1:
-            print("Please enter a number between 1 and 10.")
-            number_guessed = int(input("Enter your guess: "))
-         elif number_guessed == guessed_number:
-              print("congratulations! You guessed the number right!")
-              play_again()
-         elif number_guessed != guessed_number:
-            attempts -= 1 # Decrease attempts by 1
-            print(f"Wrong guess! You have {attempts} attempts left.")
-            if number_guessed != guessed_number and attempts == 1:
-                print("This is your last attempt, make it count!")
-                print("Hint: the number is " + ("even" if guessed_number % 2 == 0 else "odd") + ".")
+   while True: # Loop until the game ends
+        try:
+            guess = int(input("Enter your guess: "))
+        except ValueError:
+            print("Invalid input, please enter a number between 1 and 10.")
+            continue
+
+        if guess == correct:
+            print("Congratulations! You guessed the correct number!")
+            play_again()
+            break
+        else:
+            attempts -= 1
             if attempts == 0:
-                print(f"Sorry, you've used all your attempts. The correct number was {guessed_number}.")
-                play_again() 
-            if number_guessed == str:
-                print("Invalid Input, please enter a number!")
+                print(f"Sorry, you've run out of attempts. The correct number was {correct}.")
+                play_again()
+                break
+            elif attempts == 1:
+                print("This is your last attempt, make it count!")
+                print("Hint: the number is " + ("even" if correct % 2 == 0 else "odd") + ".")
             else:
-                print("Invalid number, use a number between 1 and 10.") 
-                attempts + 1
+                print(f"Wrong number! You have {attempts} attempts left.")
 
 def main_menu(): # Main Menu          
     print("Would you like to play?")
@@ -71,5 +68,5 @@ def main_menu(): # Main Menu
         main_menu()
 
 
-print("Hello this is a guessing game!")
+print("Hello this is a numbers guessing game!")
 main_menu()
