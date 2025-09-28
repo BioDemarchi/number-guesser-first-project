@@ -35,6 +35,10 @@ def game(): # Main Game Logic
             print("Invalid input, please enter a number between 1 and 10.")
             continue
 
+        if guess < 1 or guess > 10:
+            print("I will give you another chance, please use a number between 1 and 10")
+            continue
+
         if guess == correct:
             print("Congratulations! You guessed the correct number!")
             play_again()
