@@ -1,27 +1,27 @@
-
+import sys
 import os
 import time
 import random
 
 
-def clear_console(): # Function to clear the console
-    if os.name == 'nt':  # For Windows
-        _ = os.system('cls')
-    else:  # For macOS and Linux
-        _ = os.system('clear')
+def quit():
+    print("Quitting the game now...")
+    if sys.platform.startswith('win'):
+        # For Windows
+        SystemExit or os._exit(0) or sys.exit()
+    else:
+        # For Linux, macOS, and other Unix-like systems
+        SystemExit or os._exit(0) or sys.exit()
+    
 
 def play_again(): # Function to ask the user if they want to play again
    answer = input("Would you like to play again? Enter yes or no: ").lower()
    if answer == "yes":
       game()
-       
    elif answer == "no":
       print("Thanks for playing! Goodbye!")
-      print("Console will clear in two seconds.")
       time.sleep(2)
-      clear_console()
-      quit()    
-       
+      restart_game()    
    else:
       print("Invalid input, please enter yes or no in lowercase.")
       play_again()
@@ -30,16 +30,14 @@ def game(): # Main Game Logic
    correct = int(random.randint(1, 10)) # Random number between 1 and 10
    attempts = 3 # Number of attempts for each game
    print("I have selected a number between 1 and 10. You have 3 attempts to guess it.")
-   
-    while True: # Loop until the game ends
+   while True: # Loop until the game ends
         try:
             guess = int(input("Enter your guess: "))
         except ValueError:
             print("Invalid input, please enter a number between 1 and 10.")
             continue
-
         if guess < 1 or guess > 10:
-            print("I will give you another chance, please use a number between 1 and 10")
+            print("I will give you another chance, please enter a number between 1 and 10.")
             continue
 
         if guess == correct:
@@ -58,25 +56,36 @@ def game(): # Main Game Logic
             else:
                 print(f"Wrong number! You have {attempts} attempts left.")
 
-def main_menu(): # Main Menu          
-    print("Would you like to play?")
+def restart_game(): # Main Menu          
+    print("if you want to play again type yes")
+    print("If you would like to quit, type no")
     answer = input("Enter yes or no: ").lower()
-    
     if answer == "yes":
         user_name = input("Enter your name: ")
         print(f"Welcome {user_name}!")
         game()
-   
     elif answer == "no":
         print("Okay, maybe next time!")
-        print("Console will clear in two seconds.")
         time.sleep(2)
-        clear_console()
-    
+        quit()
     else:
         print("Invalid input, please enter yes or no in lowercase.")
         main_menu()
 
+def main_menu(): # Main Menu          
+    print("Would you like to play?")
+    answer = input("Enter yes or no: ").lower()
+    if answer == "yes":
+        user_name = input("Enter your name: ")
+        print(f"Welcome {user_name}!")
+        game()
+    elif answer == "no":
+        print("Okay, maybe next time!")
+        time.sleep(2)
+        restart_game()
+    else:
+        print("Invalid input, please enter yes or no in lowercase.")
+        main_menu()
 
 print("Hello this is a numbers guessing game!")
 main_menu()
