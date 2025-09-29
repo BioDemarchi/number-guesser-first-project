@@ -8,10 +8,10 @@ def quit():
     print("Quitting the game now...")
     if sys.platform.startswith('win'):
         # For Windows
-        SystemExit or os._exit(0) or sys.exit()
+        SystemExit or os._exit(0) or sys.exit() and os.system('cls)')
     else:
         # For Linux, macOS, and other Unix-like systems
-        SystemExit or os._exit(0) or sys.exit()
+        SystemExit or os._exit(0) or sys.exit() and os.system('clear)')
     
 
 def play_again(): # Function to ask the user if they want to play again
@@ -19,8 +19,8 @@ def play_again(): # Function to ask the user if they want to play again
    if answer == "yes":
       game()
    elif answer == "no":
-      print("Thanks for playing! Goodbye!")
-      time.sleep(2)
+      print("Thanks for playing! See you!")
+      time.sleep(1)
       restart_game()    
    else:
       print("Invalid input, please enter yes or no in lowercase.")
@@ -56,7 +56,8 @@ def game(): # Main Game Logic
             else:
                 print(f"Wrong number! You have {attempts} attempts left.")
 
-def restart_game(): # Main Menu          
+def restart_game(): # Main Menu        
+    print('Before you quit, would you like to play again?')  
     print("if you want to play again type yes")
     print("If you would like to quit, type no")
     answer = input("Enter yes or no: ").lower()
@@ -81,6 +82,7 @@ def main_menu(): # Main Menu
         game()
     elif answer == "no":
         print("Okay, maybe next time!")
+        time.sleep(1)
         restart_game()
     else:
         print("Invalid input, please enter yes or no in lowercase.")
