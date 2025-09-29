@@ -65,7 +65,7 @@ def restart_game(): # Main Menu
         print(f"Welcome {user_name}!")
         game()
     elif answer == "no":
-        print("Okay, maybe next time!")
+        print("Sweet as, shutting it down in 1...2...pft")
         time.sleep(2)
         quit()
     else:
@@ -81,7 +81,6 @@ def main_menu(): # Main Menu
         game()
     elif answer == "no":
         print("Okay, maybe next time!")
-        time.sleep(2)
         restart_game()
     else:
         print("Invalid input, please enter yes or no in lowercase.")
